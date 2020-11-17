@@ -35,4 +35,13 @@ class FluentArrTest extends TestCase
         $fluentArr[]= $addElement;
         $this->assertEquals($addElement, $fluentArr[count($fluentArr)-1]);
     }
+
+    /** @test */
+    public function test_foreach()
+    {
+        $fluentArr = new FluentArr(self::SIMPLE_INDEXES_ARRAY);
+        foreach ($fluentArr as $key => $value) {
+            $this->assertEquals($value, self::SIMPLE_INDEXES_ARRAY[$key]);
+        }
+    }
 }
