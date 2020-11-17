@@ -48,10 +48,38 @@ class FluentArrTest extends TestCase
 
     public function test_get_reference()
     {
-        $fluentArr = new FluentArr(self::SIMPLE_ASSOC_ARRAY);
         $key = 'key2';
         $newValue = 'value3';
+        $fluentArr = new FluentArr(self::SIMPLE_ASSOC_ARRAY);
         $elt = &$fluentArr->get($key);
+        $elt = $newValue;
+        $this->assertEquals($newValue, $fluentArr[$key]);
+    }
+
+    public function test_chaining_set()
+    {
+        $fluentArr = new FluentArr();
+        $fluentArr->set('key1', 'value1')->set('key2', 'value2');
+        $this->assertCount(2, $fluentArr);
+        $this->assertEquals($fluentArr['key1'], 'value1');
+        $this->assertEquals($fluentArr['key2'], 'value2');
+    }
+
+    public function test_magic_set()
+    {
+        $value = 'value';
+        $fluentArr = new FluentArr();
+        $fluentArr->key = $value;
+        $this->assertEquals($fluentArr['key'], $value);
+        $this->assertCount(1, $fluentArr);
+    }
+
+    public function test_magic_get()
+    {
+        $key = 'key2';
+        $newValue = 'value3';
+        $fluentArr = new FluentArr(self::SIMPLE_ASSOC_ARRAY);
+        $elt = &$fluentArr->$key;
         $elt = $newValue;
         $this->assertEquals($newValue, $fluentArr[$key]);
     }

@@ -22,6 +22,16 @@ class FluentArr implements Iterator, ArrayAccess, Countable
         $this->length = count($array);
     }
 
+    public function &__get($offset)
+    {
+        return $this->get($offset);
+    }
+
+    public function __set($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
     final public function &get($offset)
     {
         return $this->array[$offset];
@@ -41,27 +51,27 @@ class FluentArr implements Iterator, ArrayAccess, Countable
         return $this;
     }
 
-    public function current()
+    final public function current()
     {
         return $this->array[$this->keys[$this->counter]];
     }
 
-    public function next()
+    final public function next()
     {
         ++$this->counter;
     }
 
-    public function key()
+    final public function key()
     {
         return $this->keys[$this->counter];
     }
 
-    public function valid()
+    final public function valid()
     {
         return isset($this->keys[$this->counter]);
     }
 
-    public function rewind()
+    final public function rewind()
     {
         $this->counter = 0;
     }
