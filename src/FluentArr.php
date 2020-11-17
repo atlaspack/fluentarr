@@ -14,7 +14,7 @@ class FluentArr implements Iterator, ArrayAccess, Countable
     private int $counter;
     private int $length;
 
-    public function __construct(array $array)
+    public function __construct(array $array = [])
     {
         $this->array = $array;
         $this->keys = array_keys($array);
@@ -58,7 +58,7 @@ class FluentArr implements Iterator, ArrayAccess, Countable
 
     public function offsetSet($offset, $value)
     {
-        $this->array[$offset] = $value;
+        $this->array[$offset ?? $this->length] = $value;
         ++$this->length;
     }
 

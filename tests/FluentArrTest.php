@@ -32,7 +32,7 @@ class FluentArrTest extends TestCase
     {
         $fluentArr = new FluentArr(self::SIMPLE_INDEXES_ARRAY);
         $addElement = [2];
-        $fluentArr[5]= $addElement;
+        $fluentArr[]= $addElement;
         $this->assertEquals($addElement, $fluentArr[count($fluentArr)-1]);
     }
 }
