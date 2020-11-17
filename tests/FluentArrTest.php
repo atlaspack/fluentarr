@@ -26,4 +26,13 @@ class FluentArrTest extends TestCase
         unset($fluentArr[2]);
         $this->assertEquals(count($testArray), count($fluentArr));
     }
+
+    /** @test */
+    public function test_correct_offset_add()
+    {
+        $fluentArr = new FluentArr(self::SIMPLE_INDEXES_ARRAY);
+        $addElement = [2];
+        $fluentArr[5]= $addElement;
+        $this->assertEquals($addElement, $fluentArr[count($fluentArr)-1]);
+    }
 }
