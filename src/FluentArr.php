@@ -4,10 +4,7 @@
 namespace Atlas\FluentArr;
 
 
-use Iterator, ArrayAccess, Countable;
-
-
-class FluentArr extends ArrayObject implements Iterator, ArrayAccess, Countable
+class FluentArr extends ArrayObject
 {
     public function __construct(array $array = [])
     {

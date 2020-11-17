@@ -4,7 +4,9 @@
 namespace Atlas\FluentArr;
 
 
-class ArrayObject
+use Iterator, ArrayAccess, Countable;
+
+class ArrayObject implements Iterator, ArrayAccess, Countable
 {
     private int $counter;
     private int $length;
@@ -21,6 +23,9 @@ class ArrayObject
 
     final public function &get($offset)
     {
+        if (is_array($this->array[$offset])) {
+            $this->array[$offset] = new self($this->array[$offset]);
+        }
         return $this->array[$offset];
     }
 
@@ -63,28 +68,33 @@ class ArrayObject
         $this->counter = 0;
     }
 
-    public function offsetExists($offset)
+    final public function offsetExists($offset)
     {
         return isset($this->array[$offset]);
     }
 
-    public function offsetGet($offset)
+    final public function offsetGet($offset)
     {
         return $this->get($offset);
     }
 
-    public function offsetSet($offset, $value)
+    final public function offsetSet($offset, $value)
     {
         return $this->set($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    final public function offsetUnset($offset)
     {
         $this->unset($offset);
     }
 
-    public function count()
+    final public function count()
     {
         return $this->length;
+    }
+
+    public function asArray(): array
+    {
+        return $this->array;
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "atlas/fluentarr",
-  "description": "OOP fluent interface for php array",
+  "description": "Fluent and easy ArrayObject",
   "keywords": [
     "array",
     "array object",
@@ -17,8 +17,7 @@
     }
   ],
   "require": {
-    "php": "^7.4",
-    "spatie/once": "^2.2"
+    "php": "^7.4"
   },
   "autoload": {
     "psr-4": {"Atlas\\FluentArr\\": "src/"}

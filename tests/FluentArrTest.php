@@ -10,6 +10,12 @@ class FluentArrTest extends TestCase
 {
     const SIMPLE_INDEXES_ARRAY = [1,2,3,4,5];
     const SIMPLE_ASSOC_ARRAY = ['key1' => 'value1', 'key2' => 'value2'];
+    const MULTIDIMENSIONAL_ARRAY = [
+        'key1' => 'value1',
+        'key2' => [
+            'key2-1' => 'value2-1'
+        ],
+    ];
 
     /** @test */
     public function test_countable()
@@ -32,7 +38,7 @@ class FluentArrTest extends TestCase
     public function test_correct_offset_add()
     {
         $fluentArr = new FluentArr(self::SIMPLE_INDEXES_ARRAY);
-        $addElement = [2];
+        $addElement = 2;
         $fluentArr[]= $addElement;
         $this->assertEquals($addElement, $fluentArr[count($fluentArr)-1]);
     }
@@ -46,6 +52,7 @@ class FluentArrTest extends TestCase
         }
     }
 
+    /** @test */
     public function test_get_reference()
     {
         $key = 'key2';
@@ -56,6 +63,7 @@ class FluentArrTest extends TestCase
         $this->assertEquals($newValue, $fluentArr[$key]);
     }
 
+    /** @test */
     public function test_chaining_set()
     {
         $fluentArr = new FluentArr();
@@ -65,6 +73,15 @@ class FluentArrTest extends TestCase
         $this->assertEquals($fluentArr['key2'], 'value2');
     }
 
+    /** @test */
+    public function test_if_array_is_multidimensional_fluentarr_returns_for_all_dimensions()
+    {
+        $fluentArr = new FluentArr(self::MULTIDIMENSIONAL_ARRAY);
+        $value = $fluentArr->get('key2')->get('key2-1');
+        $this->assertEquals('value2-1', $value);
+    }
+
+    /** @test */
     public function test_magic_set()
     {
         $value = 'value';
@@ -74,6 +91,7 @@ class FluentArrTest extends TestCase
         $this->assertCount(1, $fluentArr);
     }
 
+    /** @test */
     public function test_magic_get()
     {
         $key = 'key2';
@@ -82,5 +100,12 @@ class FluentArrTest extends TestCase
         $elt = &$fluentArr->$key;
         $elt = $newValue;
         $this->assertEquals($newValue, $fluentArr[$key]);
+    }
+
+    /** @test */
+    public function test_as_array()
+    {
+        $fluentArr = new FluentArr(self::SIMPLE_INDEXES_ARRAY);
+        $this->assertEquals(self::SIMPLE_INDEXES_ARRAY, $fluentArr->asArray());
     }
 }
