@@ -9,6 +9,7 @@ use Atlas\FluentArr\FluentArr;
 class FluentArrTest extends TestCase
 {
     const SIMPLE_INDEXES_ARRAY = [1,2,3,4,5];
+    const SIMPLE_ASSOC_ARRAY = ['key1' => 'value1', 'key2' => 'value2'];
 
     /** @test */
     public function test_countable()
@@ -43,5 +44,15 @@ class FluentArrTest extends TestCase
         foreach ($fluentArr as $key => $value) {
             $this->assertEquals($value, self::SIMPLE_INDEXES_ARRAY[$key]);
         }
+    }
+
+    public function test_get_reference()
+    {
+        $fluentArr = new FluentArr(self::SIMPLE_ASSOC_ARRAY);
+        $key = 'key2';
+        $newValue = 'value3';
+        $elt = &$fluentArr->get($key);
+        $elt = $newValue;
+        $this->assertEquals($newValue, $fluentArr[$key]);
     }
 }
