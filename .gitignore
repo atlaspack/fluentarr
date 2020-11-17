@@ -1,5 +1,6 @@
 fatest.php
 composer.phar
 composer.lock
+.phpunit.result.cache
 /vendor
 /.idea

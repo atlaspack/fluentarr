@@ -1,7 +1,7 @@
 <?php
 
 
-namespace FluentArr;
+namespace Atlas\FluentArr;
 
 
 use Iterator, ArrayAccess, Countable;

@@ -21,10 +21,13 @@
     "spatie/once": "^2.2"
   },
   "autoload": {
-    "psr-4": {"FluentArr\\": "src/"}
+    "psr-4": {"Atlas\\FluentArr\\": "src/"}
   },
   "config": {
     "sort-packages": true
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.4"
