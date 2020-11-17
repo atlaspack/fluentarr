@@ -1,0 +1,5 @@
+fatest.php
+composer.phar
+composer.lock
+/vendor
+/.idea

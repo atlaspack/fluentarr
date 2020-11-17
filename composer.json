@@ -1,0 +1,32 @@
+{
+  "name": "atlas/fluentarr",
+  "description": "OOP fluent interface for php array",
+  "keywords": [
+    "array",
+    "array object",
+    "fluent array",
+    "atlas",
+    "fluentarr"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Panteleev",
+      "email": "githubatlas@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "spatie/once": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {"FluentArr\\": "src/"}
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.4"
+  }
+}
